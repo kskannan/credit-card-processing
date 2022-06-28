@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.publicis.sapient</groupId>
-	<artifactId>credit-card-processing</artifactId>
+	<artifactId>credit-cardData-processing</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>credit-card-processing</name>
+	<name>credit-cardData-processing</name>
 	<description>Assessment project for Publicis Sapient</description>
 	<properties>
 		<java.version>18</java.version>
