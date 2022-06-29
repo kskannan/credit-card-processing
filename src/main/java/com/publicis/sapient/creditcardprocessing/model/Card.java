@@ -1,10 +1,12 @@
 package com.publicis.sapient.creditcardprocessing.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity(name = "CREDIT_CARD")
 public class Card {
     @Id
@@ -17,7 +19,7 @@ public class Card {
     private long cardNumber;
 
     private int cardLimit;
-    private double balance;
 
+    private double balance;
 
 }

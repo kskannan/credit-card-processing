@@ -12,10 +12,8 @@ import java.util.stream.Collectors;
 public class CardServiceImpl implements CardService{
     @Override
     public List<CardData> getAllCardDetails(Supplier<List<Card>> fetchCardDetails) {
-
         var cardDetails = fetchCardDetails.get();
-        List<CardData> lst = cardDetails.stream().map(this::mapToCardData).collect(Collectors.toList());
-        return lst;
+        return cardDetails.stream().map(this::mapToCardData).collect(Collectors.toList());
     }
 
     private CardData mapToCardData(Card card){
