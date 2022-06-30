@@ -5,9 +5,10 @@ import com.publicis.sapient.creditcardprocessing.model.Card;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.function.*;
+import java.util.Random;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -23,15 +24,13 @@ public class CardServiceImpl implements CardService{
         return mapToCardData(save.apply(card));
     }
     private Card mapToCard(CardData cardData){
-//        return new Card(cardData., card.getCardNumber(), card.getCardLimit());
-        return new Card();
+       return new Card(getNextId(), cardData.name(), cardData.cardNumber(), cardData.cardLimit(), 0.00);
     }
     private CardData mapToCardData(Card card){
         return new CardData(card.getName(), card.getCardNumber(), card.getCardLimit());
-
     }
 
-
-
-
+    private static int getNextId(){
+        return new Random(10000).nextInt();
+    }
 }

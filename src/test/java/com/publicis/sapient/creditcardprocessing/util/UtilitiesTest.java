@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class UtilitiesTest {
 
     @Test
-    void validateCardCheck() {
+    void validCardCheck() {
        assertTrue(validateUsingLuhn().test(4648354228028685L));
     }
 
