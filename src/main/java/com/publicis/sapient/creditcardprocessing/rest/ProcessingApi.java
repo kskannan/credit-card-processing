@@ -12,7 +12,7 @@ import java.util.List;
 public interface ProcessingApi {
 
     @PostMapping("/add")
-    void addCard(@RequestBody CardData cardData);
+    CardData addCard(@RequestBody CardData cardData);
 
     @GetMapping("get/all")
     List<CardData> getCardDetails();

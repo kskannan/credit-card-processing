@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
+
+import static com.publicis.sapient.creditcardprocessing.util.Utilities.validateUsingLuhn;
 
 @RestController
 public class ProcessingController implements ProcessingApi{
@@ -17,14 +20,17 @@ public class ProcessingController implements ProcessingApi{
     @Autowired
     private CardService cardService;
     @Override
-    public void addCard(CardData cardData) {
-
+    public CardData addCard(CardData cardData) {
+        return Optional.of(validateUsingLuhn().test(cardData.cardNumber()))
+                .map(validCard -> {
+                     if(validCard)
+                         return cardService.addNewCard(cardData, cardRepository::save);
+                     else throw new RuntimeException("Invalid card number");
+                })
+                .orElseThrow();
     }
-
     @Override
     public List<CardData> getCardDetails() {
-        var lst = cardService.getAllCardDetails(cardRepository::findAll);
-        lst.forEach(System.out::println);
-        return lst;
+        return cardService.getAllCardDetails(cardRepository::findAll);
     }
 }
