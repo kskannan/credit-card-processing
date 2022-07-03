@@ -31,6 +31,6 @@ public class CardServiceImpl implements CardService{
     }
 
     private static int getNextId(){
-        return new Random(10000).nextInt();
+        return new Random().nextInt(10000);
     }
 }
