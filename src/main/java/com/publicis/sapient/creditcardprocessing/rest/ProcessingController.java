@@ -4,6 +4,8 @@ import com.publicis.sapient.creditcardprocessing.data.CardData;
 import com.publicis.sapient.creditcardprocessing.repository.CardRepository;
 import com.publicis.sapient.creditcardprocessing.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,11 +22,11 @@ public class ProcessingController implements ProcessingApi{
     @Autowired
     private CardService cardService;
     @Override
-    public CardData addCard(CardData cardData) {
+    public ResponseEntity<CardData> addCard(CardData cardData) {
         return Optional.of(validateUsingLuhn().test(cardData.cardNumber()))
                 .map(validCard -> {
                      if(validCard)
-                         return cardService.addNewCard(cardData, cardRepository::save);
+                         return new ResponseEntity(cardService.addNewCard(cardData, cardRepository::save), HttpStatus.OK);
                      else throw new RuntimeException("Invalid card number");
                 })
                 .orElseThrow();
